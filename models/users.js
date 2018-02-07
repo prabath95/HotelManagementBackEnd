@@ -15,13 +15,27 @@ var UserSchema = new Schema({
     required: true,
     unique: true
   },
-  contact:{
-    type: String,
+  age:{
+    type: Number,
     required: true
   },
   password:{
     type: String,
     required: true
+  },
+  role:{
+    type: String,
+    required: true
+  },
+  gendar:{
+    type: String,
+    required: true
+  },
+  speciality:{
+    type: String,
+  },
+  hospital:{
+    type: String,
   }
 });
 

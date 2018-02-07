@@ -13,8 +13,12 @@ router.post('/user/new', function(req, res) {
     user.firstName = req.body.firstName;
     user.lastname = req.body.lastname;
     user.Email = req.body.Email;
-    user.contact = req.body.contact;
+    user.age = req.body.age;
     user.password = req.body.password;
+    user.role = req.body.role;
+    user.gendar = req.body.gendar;
+    user.speciality = req.body.speciality;
+    user.hospital = req.body.hospital;
     console.log(user);
     modelUser.findOne({Email:req.body.Email},function(error,UserRet){
         if(error){
@@ -61,7 +65,8 @@ router.post('/user/new', function(req, res) {
             res.json({
                 success:true,
                 msg:'Sucessfully logged in',
-                user:user.Email
+                user:user.Email,
+                role:user.role
             });
           }else{
               res.json({
@@ -98,5 +103,16 @@ router.post('/user/new', function(req, res) {
         }
     });
   });
-  
+  //--------------------------------------------GET ALL User---------------------------------------------------------------
+router.post('/user/getall', function(req,res) {
+    console.log(req.params.role)
+    modelUser.find(
+        { role: req.body.role })
+        .then(function (users) {
+          if (!users) { return res.sendStatus(404); }
+          console.log(users);
+          return res.json(users);
+        })
+    
+});
   module.exports = router;
